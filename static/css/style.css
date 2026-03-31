@@ -1,0 +1,284 @@
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary:   #4f6ef7;
+  --primary-h: #3756e0;
+  --accent:    #f7924f;
+  --bg:        #f4f6fb;
+  --panel-bg:  #ffffff;
+  --border:    #dde3ef;
+  --text:      #1e2437;
+  --muted:     #6b7490;
+  --shadow:    0 2px 12px rgba(0,0,0,.08);
+  --radius:    10px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, #4f6ef7 0%, #7b4ff7 100%);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+.header h1 { font-size: 1.8rem; font-weight: 700; }
+.subtitle   { margin-top: .3rem; font-size: 1rem; opacity: .85; }
+
+/* ── Layout ── */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 1.5rem;
+  max-width: 1280px;
+  margin: 1.5rem auto;
+  padding: 0 1.5rem 2rem;
+}
+@media (max-width: 860px) {
+  .container { grid-template-columns: 1fr; }
+}
+
+/* ── Panels ── */
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.panel h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 2px solid var(--primary);
+  color: var(--primary);
+}
+.panel h3 {
+  font-size: .95rem;
+  font-weight: 600;
+  margin: 1.2rem 0 .6rem;
+  color: var(--text);
+}
+
+/* ── Dimension Card ── */
+.dim-card {
+  background: #f8f9fe;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1rem .8rem;
+  margin-bottom: .9rem;
+  position: relative;
+}
+.dim-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .7rem;
+}
+.dim-card-title {
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--primary);
+}
+.btn-remove {
+  background: none;
+  border: none;
+  color: #cc4444;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 .2rem;
+}
+.btn-remove:hover { color: #990000; }
+
+.dim-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem .8rem;
+}
+.dim-grid .full-width { grid-column: 1 / -1; }
+
+.field label {
+  display: block;
+  font-size: .78rem;
+  color: var(--muted);
+  margin-bottom: .2rem;
+}
+.field input,
+.field select {
+  width: 100%;
+  padding: .38rem .55rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: .88rem;
+  background: #fff;
+  color: var(--text);
+  transition: border-color .15s;
+}
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+.sigma-row { margin-top: .4rem; }
+
+/* ── Global settings ── */
+.global-settings {
+  margin: 1rem 0;
+  background: #eef1fe;
+  border-radius: 8px;
+  padding: .7rem 1rem;
+}
+.global-settings label {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .88rem;
+  font-weight: 500;
+}
+.global-settings input {
+  width: 70px;
+  padding: .3rem .5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: .88rem;
+}
+
+/* ── Buttons ── */
+.btn {
+  padding: .55rem 1.2rem;
+  border: none;
+  border-radius: 7px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.btn:active { transform: scale(.97); }
+.btn-add {
+  width: 100%;
+  background: #eef1fe;
+  color: var(--primary);
+  border: 1.5px dashed var(--primary);
+  margin-bottom: .5rem;
+}
+.btn-add:hover { background: #dce2fd; }
+.btn-primary   { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-h); }
+.btn-secondary { background: #e8ecf5; color: var(--text); }
+.btn-secondary:hover { background: #d8ddef; }
+.action-row    { display: flex; gap: .8rem; margin-top: .5rem; }
+
+/* ── Error ── */
+.error-msg {
+  margin-top: .8rem;
+  background: #fff0f0;
+  border: 1px solid #f5c2c2;
+  border-radius: 7px;
+  padding: .6rem .9rem;
+  font-size: .85rem;
+  color: #c0392b;
+}
+.hidden { display: none !important; }
+
+/* ── Placeholder ── */
+.placeholder {
+  text-align: center;
+  color: var(--muted);
+  padding: 2.5rem 1rem;
+  font-size: .95rem;
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+}
+
+/* ── Summary cards ── */
+.summary-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: .5rem;
+}
+.card {
+  border-radius: 9px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+.card-wc  { background: #fff4ec; border: 1px solid #f5d0b0; }
+.card-rss { background: #eef1fe; border: 1px solid #c1cafd; }
+.card-label {
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+.card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.card-wc  .card-value { color: var(--accent); }
+.card-rss .card-value { color: var(--primary); }
+.card-sub {
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+/* ── Contribution Table ── */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .85rem;
+}
+thead th {
+  background: #f0f2fa;
+  padding: .55rem .75rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+tbody td {
+  padding: .5rem .75rem;
+  border-top: 1px solid var(--border);
+}
+tbody tr:hover { background: #f8f9fe; }
+
+/* Progress bar cell */
+.pct-bar-cell { min-width: 140px; }
+.pct-bar-wrap { display: flex; align-items: center; gap: .5rem; }
+.pct-bar {
+  flex: 1;
+  height: 8px;
+  background: #e2e6f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.pct-bar-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+  transition: width .3s;
+}
+.pct-label { font-size: .8rem; color: var(--text); min-width: 38px; text-align: right; }
+
+/* ── Chart ── */
+.chart-wrapper {
+  position: relative;
+  height: 320px;
+  margin-top: .4rem;
+}
