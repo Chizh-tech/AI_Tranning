@@ -39,7 +39,7 @@ function addDimCard(data = {}) {
       <div class="field full-width">
         <label>Name</label>
         <input type="text" class="d-name" placeholder="e.g. Shaft OD"
-               value="${escHtml(data.name || "")}" />
+               value="${escapeHtml(data.name || "")}" />
       </div>
       <div class="field">
         <label>Nominal value</label>
@@ -138,13 +138,13 @@ function renderResults(data) {
   const { worst_case, rss, dimensions, distribution_points } = data;
 
   // Cards
-  document.getElementById("wc-value").textContent = `± ${fmt(worst_case.plus)}`;
+  document.getElementById("wc-value").textContent = `± ${formatNumber(worst_case.plus)}`;
   document.getElementById("wc-range").textContent =
-    `[${fmt(worst_case.minus)},  +${fmt(worst_case.plus)}]`;
+    `[${formatNumber(worst_case.minus)},  +${formatNumber(worst_case.plus)}]`;
 
-  document.getElementById("rss-value").textContent = `± ${fmt(rss.plus)}`;
+  document.getElementById("rss-value").textContent = `± ${formatNumber(rss.plus)}`;
   document.getElementById("rss-range").textContent =
-    `[${fmt(rss.minus)},  +${fmt(rss.plus)}]`;
+    `[${formatNumber(rss.minus)},  +${formatNumber(rss.plus)}]`;
 
   // Contribution table
   const tbody = document.getElementById("contrib-tbody");
@@ -152,10 +152,10 @@ function renderResults(data) {
   dimensions.forEach((d) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${escHtml(d.name)}</td>
-      <td>± ${fmt(d.tolerance)}</td>
+      <td>${escapeHtml(d.name)}</td>
+      <td>± ${formatNumber(d.tolerance)}</td>
       <td>${d.distribution === "normal" ? "Normal" : "Uniform"}</td>
-      <td>${fmtSci(d.variance)}</td>
+      <td>${formatScientific(d.variance)}</td>
       <td class="pct-bar-cell">
         <div class="pct-bar-wrap">
           <div class="pct-bar">
@@ -229,7 +229,7 @@ function renderChart(pts, wc, rss) {
           title: { display: true, text: "Deviation from nominal" },
           ticks: {
             maxTicksLimit: 10,
-            callback: (v) => fmt(v),
+            callback: (v) => formatNumber(v),
           },
         },
         y: {
@@ -262,10 +262,10 @@ function onReset() {
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
-function fmt(v)    { return parseFloat(v).toPrecision(6).replace(/\.?0+$/, ""); }
-function fmtSci(v) { return parseFloat(v).toExponential(3); }
+function formatNumber(v)    { return parseFloat(v).toPrecision(6).replace(/\.?0+$/, ""); }
+function formatScientific(v) { return parseFloat(v).toExponential(3); }
 
-function escHtml(str) {
+function escapeHtml(str) {
   return String(str)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")

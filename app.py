@@ -1,4 +1,5 @@
 import math
+import os
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
@@ -87,7 +88,9 @@ def calculate():
     # RSS
     # Total variance is the sum of component variances.
     # Normal:  variance_i = (tolerance_i / sigma_i)^2
-    # Uniform: variance_i = (2 * tolerance_i)^2 / 12  = tolerance_i^2 / 3
+    # Uniform: tolerance_i is the half-width (±) of the distribution.
+    #          For Uniform(-a, +a), variance = a^2 / 3.
+    #          With a = tolerance_i: variance_i = tolerance_i^2 / 3
     # Combined RSS tolerance at result_sigma:
     #   rss_tolerance = sqrt(total_variance) * result_sigma
     # ------------------------------------------------------------------
@@ -166,4 +169,5 @@ def calculate():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    debug = os.environ.get("FLASK_DEBUG", "0") == "1"
+    app.run(debug=debug)
