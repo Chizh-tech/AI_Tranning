@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tolerance Analysis (TA) Tool</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1>🔧 Tolerance Analysis Tool</h1>
+    <p class="subtitle">Worst Case &amp; RSS Statistical Analysis</p>
+  </header>
+
+  <main class="container">
+    <!-- ── Left panel: inputs ── -->
+    <section class="panel panel-input">
+      <h2>Dimensions</h2>
+
+      <div id="dimensions-list"></div>
+
+      <button class="btn btn-add" id="btn-add-dim" type="button">
+        + Add Dimension
+      </button>
+
+      <div class="global-settings">
+        <label>
+          Result sigma (n&sigma;):
+          <input
+            type="number"
+            id="result-sigma"
+            value="3"
+            min="1"
+            max="6"
+            step="0.5"
+          />
+        </label>
+      </div>
+
+      <div class="action-row">
+        <button class="btn btn-primary" id="btn-calculate" type="button">
+          Calculate
+        </button>
+        <button class="btn btn-secondary" id="btn-reset" type="button">
+          Reset
+        </button>
+      </div>
+
+      <div id="error-msg" class="error-msg hidden"></div>
+    </section>
+
+    <!-- ── Right panel: results ── -->
+    <section class="panel panel-results">
+      <h2>Results</h2>
+
+      <div id="results-placeholder" class="placeholder">
+        Add dimensions and click <strong>Calculate</strong> to see results.
+      </div>
+
+      <div id="results-content" class="hidden">
+        <!-- Summary cards -->
+        <div class="summary-cards">
+          <div class="card card-wc">
+            <span class="card-label">Worst Case</span>
+            <span class="card-value" id="wc-value">—</span>
+            <span class="card-sub" id="wc-range">—</span>
+          </div>
+          <div class="card card-rss">
+            <span class="card-label">RSS</span>
+            <span class="card-value" id="rss-value">—</span>
+            <span class="card-sub" id="rss-range">—</span>
+          </div>
+        </div>
+
+        <!-- Contribution table -->
+        <h3>Dimension Contributions</h3>
+        <div class="table-wrapper">
+          <table id="contrib-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Tolerance (±)</th>
+                <th>Distribution</th>
+                <th>Variance</th>
+                <th>Contribution %</th>
+              </tr>
+            </thead>
+            <tbody id="contrib-tbody"></tbody>
+          </table>
+        </div>
+
+        <!-- Chart -->
+        <h3>Distribution Chart</h3>
+        <div class="chart-wrapper">
+          <canvas id="ta-chart"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
